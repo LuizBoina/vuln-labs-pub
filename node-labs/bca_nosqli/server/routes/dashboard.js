@@ -4,8 +4,6 @@ const Todo = require('../models/todo');
 
 router.get("/", authorize, async (req, res) => {
   try {
-    // url to NoSQLInjection: http://localhost:5000/dashboard?id[$ne]=000000000000000000000000
-    // in Express, id[$ne]=0 == id:{ $ne: 0 }
     const todos = await Todo.find({ user_id: req.query.id })
     res.json(todos);
   } catch (err) {
