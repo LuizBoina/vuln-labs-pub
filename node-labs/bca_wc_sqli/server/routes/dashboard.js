@@ -6,7 +6,6 @@ const pool = require("../db");
 
 router.get("/:id", authorize, async (req, res) => {
   try {
-    // payload on localStorage userId: 1 UNION ALL SELECT user_email, user_name, user_email || ' '  || user_password FROM users
     const user = await pool.query(
       `SELECT u.user_name, t.todo_id, t.description FROM users AS u LEFT JOIN todos AS t ON u.user_id = t.user_id WHERE u.user_id = ${req.params.id}`,
     );
