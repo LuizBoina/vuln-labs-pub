@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__, static_url_path = '/static', static_folder = 'static')
 # definindo onde salvar imagens
-app.config['UPLOAD_PATH'] = 'uploads'
+app.config['UPLOAD_PATH'] = './uploads/'
 app.config['DEBUG'] = True
 
 @app.route('/')
@@ -16,7 +16,7 @@ def index():
 def upload_file():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
-        uploaded_file.save(uploaded_file.filename)
+        uploaded_file.save(app.config['UPLOAD_PATH'] + uploaded_file.filename)
     return redirect(url_for('index'))
 
 @app.errorhandler(404)
